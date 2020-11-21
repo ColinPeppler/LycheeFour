@@ -1,13 +1,12 @@
 function init(){
-    chrome.storage.sync.set({init_flag: false, Point: 0},  function(){
+    chrome.storage.local.set({init_flag: false, Point: 0},  function(){
         console.log("set success")
+
     });
 }
 
 try{
-    if (chrome.storage.sync.get("init_flag"), function(res) {
-    console.log(res)
-}); 
+    chrome.storage.local.get(["init_flag"], function(res) {console.log(res)})
 } catch(ERROR) {
     console.log(ERROR)
     init()
