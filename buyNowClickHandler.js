@@ -1,6 +1,14 @@
+const page = document.getElementById('a-page')
 const buyNowButton = document.getElementById('buy-now-button')
 if (buyNowButton != null) {
-	buyNowButton.onclick = () => {
-		console.log('yeet.. i sleep now 5 secs')
-	};
+	const dialog = document.createElement('dialog')
+	dialog.id = 'our-dialog';
+	dialog.innerHTML = 'I am a dialog!';
+	page.appendChild(dialog);
+
+	buyNowButton.addEventListener('click', () => {
+		//dialog.show()		//it won't show :(
+		alert('yeet')
+	});
+}
 
