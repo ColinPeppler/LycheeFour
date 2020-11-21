@@ -9,13 +9,13 @@
   "background": {
         "scripts": ["background.js"]
     },
-    "permissions": [
-        "contextMenus"
-    ],
-    "content_scripts": [
-        {
-            "matches": ["https://www.amazon.ca/*"],
-            "js": ["content.js"]
-        }
-    ]
+	"permissions": [
+			"contextMenus"
+	],
+	"content_scripts": [
+			{
+					"matches": ["https://www.amazon.ca/*"],
+					"js": ["content.js", "buyNowClickHandler.js"]
+			}
+	]
 }
