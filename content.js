@@ -11,28 +11,29 @@ try{
 } catch(ERROR) {
     console.log(ERROR)
     init()
+    setTimeout(function(){main()}, 1000)
 }
 
-
-try{
-    console.log("This is Lychess")
-    category = document.getElementById("nav-subnav").getAttribute("data-category")
-    if (category != "grocery"){
-        console.log("None grocery")
-        document.getElementById("buy-now-button").onclick = function() {
-            if (confirm("r u sure u wanna buy this?")) {
-                localStorage.Points--
+function main() {
+    try{
+        category = document.getElementById("nav-subnav").getAttribute("data-category")
+        if (category != "grocery"){
+            document.getElementById("buy-now-button").onclick = function() {
+                if (confirm("r u sure u wanna buy this?")) {
+                    localStorage.Points--
+                }
+                else{
+                    localStorage.Point++
+                }
+                console.log(localStorage.Points)
+                
             }
-            else{
-                localStorage.Point++
-            }
-            console.log(localStorage.Points)
-            
+        } 
+        else {
+            console.log("Grocery")
         }
-    } 
-    else {
-        console.log("Grocery")
+    } catch(ERROR) {
+        console.log(ERROR)
     }
-} catch(ERROR) {
-    console.log(ERROR)
 }
+
