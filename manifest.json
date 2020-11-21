@@ -14,7 +14,7 @@
 	],
 	"content_scripts": [
 		{
-			"matches": ["https://www.amazon.ca/*"],
+			"matches": ["https://www.amazon.ca/*", "https://www.amazon.com/*"],
 			"js": ["content.js", "buyNowClickHandler.js"]
 		}
 	]
