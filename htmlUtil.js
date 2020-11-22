@@ -50,12 +50,12 @@ function getBaseCard(paragraph, buttonHTML) {
 			<div style="display: flex; margin-bottom: 40px">
 				<div style="display: flex; flex-direction: column; margin-right: 100px">
 					<h6 style="${mb8}"> You\'ve saved: </h6>
-					<h5 style="${font24}; color: #632C39"> $88.88 </h5>
+					<h5 id="saved-amt" style="${font24}; color: #632C39"> $88.88 </h5>
 				</div>
 
 				<div style="display: flex; flex-direction: column;">
 					<h6 style="${mb8}"> Points: </h6>
-					<h5 style="${font24}; color: #E52C55"> 100 </h5>
+					<h5 id="points" style="${font24}; color: #E52C55"> 100 </h5>
 				</div>
 			</div>
 

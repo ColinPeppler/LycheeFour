@@ -32,6 +32,14 @@ async function injectDialog() {
 }
 
 init().then(() => {
-	console.log('init callback')
-	injectDialog();
-});
+	injectDialog().then(() => {
+		chrome.storage.local.get(['Point', 'Saved_money'], (res) => {
+			const pts = res.Point
+			const savedAmt = res.Saved_money
+			const ptsElem = document.getElementById('points')
+			const amtElem = document.getElementById('saved-amt')
+			ptsElem.innerHTML = pts
+			amtElem.innerHTML =  savedAmt
+		});
+	})
+})
