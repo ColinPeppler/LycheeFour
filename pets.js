@@ -31,6 +31,7 @@ function add_points(p){
         if (pet_struct.exp >= level_arr[pet_struct.level]){
             pet_struct.level++
         }
+        console.log(pet_struct)
         chrome.storage.local.set({My_Pet: pet_struct}, function() {
             if (pet_struct.level == 1){
                 rand_branch()
