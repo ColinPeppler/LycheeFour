@@ -1,5 +1,10 @@
 /*-------------------------------------Func---------------------------------------------*/
 
+async function getValueFromStorage(key, callback) {
+	chrome.storage.local.get([key], res => {
+		callback(res)
+	})
+}
 
 // Update Cart in storage
 function update_cart_storage(item) {
@@ -65,8 +70,8 @@ function change_point(point){
 /*-------------------------------------Init---------------------------------------------*/
 
 // Init function
-function init(){
-    chrome.storage.local.set({
+async function initStorage(){
+    await chrome.storage.local.set({
         Point: 0,
         Saved_money: 0,
         CartItem: []
@@ -75,18 +80,16 @@ function init(){
     });
 }
 
-// Checks if this plugin have ben init before
-try{
-    chrome.storage.local.get(["Point"], function() {})
-} catch(ERROR) {
-    // If never init, it will throw an error, and when catched, run init()
-    console.log(ERROR)
-    init()
-} finally {
-    // Everyting is asynic so wait for 1 second after the init()
-    setTimeout(function(){main()}, 1000)
+async function init() {
+	// Checks if this plugin have ben init before
+	try{
+			chrome.storage.local.get(["Point"], function() {})
+	} catch(ERROR) {
+			// If never init, it will throw an error, and when catched, run init()
+			console.log(ERROR)
+			await initStorage()
+	}
 }
-
 
 
 /*-------------------------------------Main---------------------------------------------*/
