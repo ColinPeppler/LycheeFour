@@ -40,3 +40,13 @@ function add_points(p){
     })
 
 }
+
+function get_petName(){
+    chrome.storage.local.get(["My_Pet"], function(ret){
+        pet_struct = ret.My_Pet
+        var str = ""
+        str = pet_struct.branch + Number(pet_struct.level)
+        
+        console.log(str)
+    })
+}
