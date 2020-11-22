@@ -30,32 +30,29 @@ const cardStyle = `
 const font24 = "font-size: 24px"
 const mb8 = "margin-bottom: 8px"
 
-const debug = "border: 1px solid red"
-
-function getBaseCard(paragraph, buttonHTML) {
+function getBaseCard(lowerBody) {
 	const url = chrome.extension.getURL('images/logo.png')
 	const exit_url = chrome.extension.getURL('images/exit.svg')
-	const lowerBody = paragraphButtonComponent(paragraph, buttonHTML) || ""
 
 	return `
 		<div style="${cardStyle}">
 			<div style="display: flex; margin-bottom: 35px; margin-top: 2px">
 				<img width="175" height"50" src="${url}"/>
 
-				<div id="close-dialog" style="position: absolute; right: 24px; top: 36px;">
+				<div class="close-dialog" style="position: absolute; right: 24px; top: 36px;">
 					<img src="${exit_url}"/>
 				</div>
 			</div>
 
 			<div style="display: flex; margin-bottom: 40px">
-				<div style="display: flex; flex-direction: column; margin-right: 100px">
+				<div style="display: flex; flex-direction: column; margin-right: 100px; text-align: center;">
 					<h6 style="${mb8}"> You\'ve saved: </h6>
-					<h5 id="saved-amt" style="${font24}; color: #632C39"> $88.88 </h5>
+					<h5 class="saved-amt" style="${font24}; color: #632C39"> $0 </h5>
 				</div>
 
-				<div style="display: flex; flex-direction: column;">
+				<div style="display: flex; flex-direction: column; text-align: center;">
 					<h6 style="${mb8}"> Points: </h6>
-					<h5 id="points" style="${font24}; color: #E52C55"> 100 </h5>
+					<h5 class="points" style="${font24}; color: #E52C55"> 100 </h5>
 				</div>
 			</div>
 
@@ -66,7 +63,7 @@ function getBaseCard(paragraph, buttonHTML) {
 
 function paragraphButtonComponent(paragraph, buttonHTML) {
 	return `
-		<div style="font-size: 20px; width: 270px; line-height: 30px">
+		<div style="font-size: 20px; width: 270px; line-height: 30px; text-align: center">
 			${paragraph}
 		</div>
 		<div style="display: flex; margin-top: 32px">
@@ -79,7 +76,6 @@ function redButton(buttonText, id) {
 	const redBtnStyle = `
 		background-color: #E52C55;
 		border-radius: 8px;
-		margin-right: 32px;
 		width: 130px;
 		height: 40px;
 		text-align: center;

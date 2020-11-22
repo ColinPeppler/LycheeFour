@@ -42,20 +42,26 @@ function add_to_cart(){
     }
 }
 
-function buy_btn_no(){
-    price = parseFloat(document.getElementById("price_inside_buybox").innerText.slice(4))
+function buy_btn_no(callback){
+    const priceStr = document.getElementById("price_inside_buybox")
+			.innerText.slice(1).replace(',', '').split('.')[0]
+		const price = parseInt(priceStr)	
     chrome.storage.local.get(["Saved_money"], function(ret){
-        price += parseFloat(ret.Saved_money)
-        change_point(Math.round(money) * 0.1)
-        chrome.storage.local.set({Saved_money: price}, function() {})
+				let savedMoney = ret.Saved_money
+				change_point(Math.round(price) * 0.1, callback)
+        savedMoney += price
+        chrome.storage.local.set({Saved_money: savedMoney}, function() {})
+				callback();
     })  
 }
 
-function change_point(point){
+function change_point(point, callback){
+		point = Math.floor(point);
     chrome.storage.local.get(["Point"], function(ret){
-        loc_point = parseInt(ret.Point)
+        let loc_point = parseInt(ret.Point)
         loc_point += point
         chrome.storage.local.set({Point: loc_point}, function() {
+					callback()
         })
     })    
 }
@@ -64,23 +70,28 @@ function change_point(point){
 /*-------------------------------------Init---------------------------------------------*/
 
 // Init function
-async function initStorage(){
-    await chrome.storage.local.set({
+async function initStorage(callback){
+    chrome.storage.local.set({
         Point: 0,
         Saved_money: 0,
-        CartItem: []
+        CartItem: [],
+				My_Pet: new Pet()
     },  function(){
         console.log("Init success")
+				callback();
     });
 }
 
 async function init(callback) {
 	// Checks if this plugin have ben init before
 	chrome.storage.local.get(["Point"], function(ret) {
-        if (ret == {}){
-            initStorage()
-        }
-    })
+			if (Object.keys(ret).length === 0){
+					initStorage(callback)
+			}
+	})
+
+	if (chrome.runtime.lastError)
+		initStorage(callback);
 }
 
 

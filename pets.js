@@ -20,10 +20,12 @@ function rand_branch(){
 }
 
 
-function add_points(p){
-    chrome.storage.local.get(["My_Pet"], function(ret){
+// feed pet
+async function add_points(p, callback){
+    chrome.storage.local.get(["My_Pet", "Point"], function(ret){
+				point = ret.Point
         pet_struct = ret.My_Pet
-        if (pet_struct.level == 2){
+        if (pet_struct.level == 2 || point < p){
             return
         }
         level_arr = [50, 100, 150]
@@ -33,20 +35,23 @@ function add_points(p){
         }
         console.log(pet_struct)
         chrome.storage.local.set({My_Pet: pet_struct}, function() {
-            if (pet_struct.level == 1){
+            if (pet_struct.level == 1 && pet_struct.branch == 'Default'){
                 rand_branch()
             }
         })
+				change_point(-1 * p, callback)
     })
 
 }
 
-function get_petName(){
+function get_petName(callback){
     chrome.storage.local.get(["My_Pet"], function(ret){
         pet_struct = ret.My_Pet
         var str = ""
         str = pet_struct.branch + Number(pet_struct.level)
         
         console.log(str)
+        console.log('before')
+				callback(str)
     })
 }

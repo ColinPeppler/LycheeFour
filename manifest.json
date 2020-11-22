@@ -7,7 +7,10 @@
 		"default_popup": "popup.html"
 	},
   "background": {
-        "scripts": ["background.js"]
+        "scripts": [
+					"background.js"
+				],
+				"persistent": false
     },
 	"permissions": [
 			"contextMenus", "storage"
@@ -15,8 +18,10 @@
 	"content_scripts": [
 		{
 			"matches": ["https://www.amazon.ca/*", "https://www.amazon.com/*"],
-			"js": ["jquery.min.js", "htmlUtil.js", "content.js", "buyNowClickHandler.js", "pets.js"]
+			"js": ["jquery.min.js", "htmlUtil.js", "pets.js", "content.js", "buyNowClickHandler.js", "buyNow.js"]
 		}
 	],
-	"web_accessible_resources": ["images/*.png", "images/*.svg"]
+	"web_accessible_resources": [
+		"images/*.png", "images/*.svg", "images/pets/*.png", "images/pets-heart/*.png"
+	]
 }
