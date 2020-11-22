@@ -82,13 +82,11 @@ async function initStorage(){
 
 async function init() {
 	// Checks if this plugin have ben init before
-	try{
-			chrome.storage.local.get(["Point"], function() {})
-	} catch(ERROR) {
-			// If never init, it will throw an error, and when catched, run init()
-			console.log(ERROR)
-			await initStorage()
-	}
+	chrome.storage.local.get(["Point"], function(ret) {
+        if (ret = {}){
+            initStorage()
+        }
+    })
 }
 
 
