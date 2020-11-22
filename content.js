@@ -20,14 +20,10 @@ function update_cart_storage(item) {
 }
 
 // Cart class
-function Cart_item_obj(item_url, begin_time, begin_price){
-    this.begin_time = begin_time;
-    this.begin_price = begin_price;
-
-    // Process the url, and slice out the id
-    var left_idx = item_url.indexOf("/dp/")+4
-    var right_idx = item_url.indexOf("?ref")
-    this.item_id = item_url.slice(left_idx, right_idx)
+function Cart_item_obj(item_url, time, price){
+    this.time = time;
+    this.price = price;
+    this.item_url = item_url
 }
 
 // WHen ever user press the "add to cart button"
@@ -40,7 +36,7 @@ function add_to_cart(){
         var url = document.URL
         
         // Create the object, and send it to update function
-        update_cart_storage(new Cart_item_obj(url, begin_time, begin_price))
+        update_cart_storage(new Cart_item_obj(url, begin_time.getTime(), begin_price))
     } catch(ERROR){
         console.log(ERROR)
     }
@@ -59,11 +55,9 @@ function change_point(point){
     chrome.storage.local.get(["Point"], function(ret){
         loc_point = parseInt(ret.Point)
         loc_point += point
-        console.log(loc_point, "ChangedPoint")
         chrome.storage.local.set({Point: loc_point}, function() {
         })
     })    
-
 }
 
 
@@ -91,6 +85,7 @@ async function init() {
 
 
 /*-------------------------------------Main---------------------------------------------*/
-
+main()
 function main() {
+    add_to_cart()
 }
