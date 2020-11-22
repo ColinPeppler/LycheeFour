@@ -74,10 +74,10 @@ async function initStorage(){
     });
 }
 
-async function init() {
+async function init(callback) {
 	// Checks if this plugin have ben init before
 	chrome.storage.local.get(["Point"], function(ret) {
-        if (ret = {}){
+        if (ret == {}){
             initStorage()
         }
     })
@@ -87,5 +87,5 @@ async function init() {
 /*-------------------------------------Main---------------------------------------------*/
 main()
 function main() {
-    add_to_cart()
+	add_to_cart()
 }
